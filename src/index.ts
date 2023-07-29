@@ -2,6 +2,7 @@ import { Categoria } from "./modules/catalogo/domain/categoria.entity";
 import { RecuperarCategoriaProps } from "./modules/catalogo/domain/categoria.types";
 import { Produto } from "./modules/catalogo/domain/produto.entity";
 import { CategoriaMap } from "./modules/catalogo/mappers/categoria.map";
+import { ProdutoMap } from "./modules/catalogo/mappers/produto.map";
 import { DomainException } from "./shared/domain/domain.exception";
 import { readFile, writeFile } from "fs";
 
@@ -65,13 +66,20 @@ finally {
 try {
     
     let produto: Produto;
-    let categoria1 = Categoria.criar({ nome: 'costura'});
-    let categoria2 = Categoria.criar({  nome: 'maoi maoi hehe'});
-    let categoria3 = Categoria.criar({  nome: 'carro', });
-    let categoria4 = Categoria.criar({  nome: 'testando', });
-    produto = Produto.criar( {nome: 'agulha', descricao: 'Produto para costura', valor: 100, categoria:[ categoria1, categoria2, categoria3, categoria4 ]})
+    let categoria = Categoria.criar({ nome: 'costura'});
+ 
+    
+    produto = Produto.criar( {nome: 'agulha', descricao: 'Produto para costura', valor: 100, categoria:[ categoria ]})
     
     console.log(produto);
+
+    let arrayProdutos = [];
+    arrayProdutos.push(produto.toDTO());
+   // arrayProdutos.push(produto2.toDTO());
+    writeFile('Produto.json', JSON.stringify(arrayProdutos), function(error:any){
+        if(error) throw error;
+        console.log('Arquivo Salvo com Sucesso!');
+    })
 
 } catch (error:any) {
     if (error instanceof DomainException) {

@@ -14,6 +14,7 @@ import {
     ProdutoCategoriaTamanhoMinimoInvalido
 
 } from "./produto.exception";
+import { ProdutoMap } from "../mappers/produto.map";
 
 class Produto extends Entity<IProduto> implements IProduto{
     
@@ -108,6 +109,10 @@ class Produto extends Entity<IProduto> implements IProduto{
         let { categoria } = props;
 
         return new Produto ({ nome, descricao, valor, categoria});
+    }
+
+    public toDTO(): IProduto{
+        return ProdutoMap.toDTO(this);
     }
 }
 
