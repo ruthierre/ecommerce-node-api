@@ -17,7 +17,7 @@ class NomeProdutoNuloOuIndefinido extends ProdutoException {
 }
 
 class NomeProdutoTamanhoMinimoInvalido extends ProdutoException {
-    public constructor(message:string = '⚠️ O nome da categoria não possui um tamanho mínimo válido.') {
+    public constructor(message:string = '⚠️ O nome do produto não possui um tamanho mínimo válido.') {
         super(message);
         this.name = 'NomeProdutoTamanhoMinimoInvalido'
         this.message = message;
@@ -25,7 +25,7 @@ class NomeProdutoTamanhoMinimoInvalido extends ProdutoException {
 }
 
 class NomeProdutoTamanhoMaximoInvalido extends ProdutoException {
-    public constructor(message:string = '⚠️ O nome da categoria não possui um tamanho máximo válido.') {
+    public constructor(message:string = '⚠️ O nome do produto não possui um tamanho máximo válido.') {
         super(message);
         this.name = 'NomeProdutoTamanhoMaximoInvalido'
         this.message = message;
@@ -57,9 +57,25 @@ class DescricaoProdutoTamanhoMaximoInvalido extends ProdutoException {
 }
 
 class ValorProdutoNegativoInvalido extends ProdutoException {
-    public constructor(message:string = '⚠️ O valor do produto é válido.') {
+    public constructor(message:string = '⚠️ O valor do produto é inválido.') {
         super(message);
         this.name = 'ValorProdutoNegativoInvalido'
+        this.message = message;
+    }
+}
+
+class ProdutoCategoriaTamanhoMinimoInvalido extends ProdutoException {
+    public constructor(message:string = '⚠️ a categoria do produto não pode está vazia.') {
+        super(message);
+        this.name = 'ProdutoCategoriaTamanhoMinimoInvalido'
+        this.message = message;
+    }
+}
+
+class ProdutoCategoriaTamanhoMaximoInvalido extends ProdutoException {
+    public constructor(message:string = '⚠️ a categoria do produto ultrapassa o limite máximo.') {
+        super(message);
+        this.name = 'ProdutoCategoriaTamanhoMaximoInvalido'
         this.message = message;
     }
 }
@@ -72,5 +88,7 @@ export {
     DescricaoProdutoNuloOuIndefinido,
     DescricaoProdutoTamanhoMaximoInvalido,
     DescricaoProdutoTamanhoMinimoInvalido,
-    ValorProdutoNegativoInvalido
+    ValorProdutoNegativoInvalido,
+    ProdutoCategoriaTamanhoMaximoInvalido,
+    ProdutoCategoriaTamanhoMinimoInvalido
 }

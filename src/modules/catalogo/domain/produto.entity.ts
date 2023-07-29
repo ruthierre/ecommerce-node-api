@@ -1,6 +1,6 @@
 import { Entity } from "../../../shared/domain/entity";
 import { Categoria } from "./categoria.entity";
-import { IProduto } from "./produto.types";
+import { IProduto, CriarProdutoProps } from "./produto.types";
 import { 
     
     NomeProdutoNuloOuIndefinido,
@@ -9,7 +9,9 @@ import {
     DescricaoProdutoNuloOuIndefinido,
     DescricaoProdutoTamanhoMaximoInvalido,
     DescricaoProdutoTamanhoMinimoInvalido,
-    ValorProdutoNegativoInvalido
+    ValorProdutoNegativoInvalido,
+    ProdutoCategoriaTamanhoMaximoInvalido,
+    ProdutoCategoriaTamanhoMinimoInvalido
 
 } from "./produto.exception";
 
@@ -18,7 +20,7 @@ class Produto extends Entity<IProduto> implements IProduto{
     private _nome: string;
     private _descricao: string;
     private _valor: number;
-    private _categoria: [Categoria]
+    private _categoria: Categoria[]
 
     public get nome(): string {
         return this._nome;
@@ -74,13 +76,39 @@ class Produto extends Entity<IProduto> implements IProduto{
         this._valor = value;
     }
 
-    public get categoria(): [Categoria] {
+    public get categoria(): Categoria[] {
         return this._categoria;
     }
     
-    private set categoria(value: [Categoria]){
+    private set categoria(value: Categoria[]){
         
+        if(value.length === 0){
+            throw new ProdutoCategoriaTamanhoMinimoInvalido();
+        }
+
+        if(value.length > 2){
+            throw new ProdutoCategoriaTamanhoMaximoInvalido();
+        }
 
         this._categoria = value;
     }
+
+    private constructor(produto: IProduto){
+        super(produto.id);
+        this.nome = produto.nome;
+        this.descricao = produto.descricao;
+        this.valor = produto.valor;
+        this.categoria = produto.categoria;
+    }
+
+    public static criar(props: CriarProdutoProps): Produto {
+        let { nome } = props;
+        let { descricao } = props;
+        let { valor } = props;
+        let { categoria } = props;
+
+        return new Produto ({ nome, descricao, valor, categoria});
+    }
 }
+
+export { Produto }

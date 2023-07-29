@@ -5,9 +5,9 @@ interface IProduto {
     nome: string,
     descricao: string,
     valor: number,
-    categoria: [Categoria]
+    categoria: Categoria[]
 }
 
-type criarProdutoProps = Omit <IProduto, "id">;
+type CriarProdutoProps = Omit <IProduto, "id">;
 
-export { IProduto, criarProdutoProps }
+export { IProduto, CriarProdutoProps }
