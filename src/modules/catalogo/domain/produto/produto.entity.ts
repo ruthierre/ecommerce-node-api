@@ -1,4 +1,4 @@
-import { Entity } from "../../../../shared/domain/entity";
+import { Entity } from "@shared/domain/entity";
 import { Categoria } from "../categoria/categoria.entity";
 import { IProduto, CriarProdutoProps, RecuperarProdutoProps } from "./produto.types";
 import { 

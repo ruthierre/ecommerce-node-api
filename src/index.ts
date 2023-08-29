@@ -1,9 +1,9 @@
-import { Categoria } from "./modules/catalogo/domain/categoria/categoria.entity";
-import { RecuperarCategoriaProps } from "./modules/catalogo/domain/categoria/categoria.types";
-import { Produto } from "./modules/catalogo/domain/produto/produto.entity";
-import { CategoriaMap } from "./modules/catalogo/mappers/categoria.map";
-import { ProdutoMap } from "./modules/catalogo/mappers/produto.map";
-import { DomainException } from "./shared/domain/domain.exception";
+import { Categoria } from "@modules/catalogo/domain/categoria/categoria.entity";
+import { RecuperarCategoriaProps } from "@modules/catalogo/domain/categoria/categoria.types";
+import { Produto } from "@modules/catalogo/domain/produto/produto.entity";
+import { CategoriaMap } from "@modules/catalogo/mappers/categoria.map";
+import { ProdutoMap } from "@modules/catalogo/mappers/produto.map";
+import { DomainException } from "@shared/domain/domain.exception";
 import { readFile, writeFile } from "fs";
 
 try {

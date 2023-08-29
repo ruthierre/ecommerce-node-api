@@ -2,7 +2,7 @@ import { beforeAll, describe, expect, test } from 'vitest';
 import { CriarCategoriaProps, RecuperarCategoriaProps } from './categoria.types';
 import { Categoria } from './categoria.entity';
 import { NomeCategoriaTamanhoMaximoInvalido, NomeCategoriaTamanhoMinimoInvalido } from './categoria.exception';
-import { IDEntityUUIDInvalid } from '../../../../shared/domain/domain.exception';
+import { IDEntityUUIDInvalid } from '@shared/domain/domain.exception';
 import { faker } from '@faker-js/faker';
 
 let nomeCategoriaValido: string;

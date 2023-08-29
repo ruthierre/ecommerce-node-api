@@ -3,7 +3,7 @@ import { beforeAll, describe, expect, test } from "vitest";
 import { Categoria } from "../categoria/categoria.entity";
 import { Produto } from "./produto.entity";
 import { DescricaoProdutoTamanhoMaximoInvalido, DescricaoProdutoTamanhoMinimoInvalido, NomeProdutoTamanhoMaximoInvalido, NomeProdutoTamanhoMinimoInvalido, ProdutoCategoriaTamanhoMaximoInvalido, ProdutoCategoriaTamanhoMinimoInvalido, ValorProdutoNegativoInvalido } from "./produto.exception";
-import { CriarProdutoProps } from "./produto.types";
+import { CriarProdutoProps } from './produto.types';
 
 let nomeProdutoValido: string;
 let nomeProdutoTamanhoMinInvalido: string;
