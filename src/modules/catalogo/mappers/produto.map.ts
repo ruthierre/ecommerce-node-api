@@ -1,5 +1,5 @@
 import { Produto } from "../domain/produto/produto.entity";
-import { IProduto } from "../domain/produto.types";
+import { IProduto, RecuperarProdutoProps } from "../domain/produto/produto.types";
 
 class ProdutoMap {
 
@@ -11,6 +11,10 @@ class ProdutoMap {
             valor: produto.valor,
             categoria: produto.categoria
         }
+    }
+
+    public static toDomain(produto: RecuperarProdutoProps): Produto{
+        return Produto.recuperar(produto);
     }
 }
 

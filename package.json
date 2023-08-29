@@ -26,6 +26,7 @@
   "author": "WALBER RUTHIERRE",
   "license": "MIT",
   "devDependencies": {
+    "@faker-js/faker": "^8.0.2",
     "@types/node": "^20.4.5",
     "@vitest/ui": "^0.33.0",
     "sucrase": "^3.34.0",

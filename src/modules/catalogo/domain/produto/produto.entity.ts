@@ -1,6 +1,6 @@
 import { Entity } from "../../../../shared/domain/entity";
 import { Categoria } from "../categoria/categoria.entity";
-import { IProduto, CriarProdutoProps } from "./produto.types";
+import { IProduto, CriarProdutoProps, RecuperarProdutoProps } from "./produto.types";
 import { 
     
     NomeProdutoNuloOuIndefinido,
@@ -87,7 +87,7 @@ class Produto extends Entity<IProduto> implements IProduto{
             throw new ProdutoCategoriaTamanhoMinimoInvalido();
         }
 
-        if(value.length > 2){
+        if(value.length > 3){
             throw new ProdutoCategoriaTamanhoMaximoInvalido();
         }
 
@@ -109,6 +109,10 @@ class Produto extends Entity<IProduto> implements IProduto{
         let { categoria } = props;
 
         return new Produto ({ nome, descricao, valor, categoria});
+    }
+
+    public static recuperar(props: RecuperarProdutoProps): Produto {
+        return new Produto(props);
     }
 
     public toDTO(): IProduto{
