@@ -1,5 +1,5 @@
 import { CriarProdutoProps } from "./produto.types";
-import { Categoria } from "./categoria.entity";
+import { Categoria } from "../categoria/categoria.entity";
 import { expect, test, describe} from "vitest";
 import { Produto } from "./produto.entity";
 import { DescricaoProdutoTamanhoMaximoInvalido, DescricaoProdutoTamanhoMinimoInvalido, NomeProdutoTamanhoMaximoInvalido, NomeProdutoTamanhoMinimoInvalido, ProdutoCategoriaTamanhoMaximoInvalido, ProdutoCategoriaTamanhoMinimoInvalido, ValorProdutoNegativoInvalido } from "./produto.exception";

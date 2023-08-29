@@ -1,4 +1,4 @@
-import { Categoria } from "./categoria.entity";
+import { Categoria } from "../categoria/categoria.entity";
 
 interface IProduto {
     id?: string
@@ -10,4 +10,6 @@ interface IProduto {
 
 type CriarProdutoProps = Omit <IProduto, "id">;
 
-export { IProduto, CriarProdutoProps }
+type RecuperarProdutoProps = Required<IProduto>;
+
+export { IProduto, CriarProdutoProps, RecuperarProdutoProps }

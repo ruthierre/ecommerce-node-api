@@ -1,5 +1,5 @@
-import { Entity } from "../../../shared/domain/entity";
-import { Categoria } from "./categoria.entity";
+import { Entity } from "../../../../shared/domain/entity";
+import { Categoria } from "../categoria/categoria.entity";
 import { IProduto, CriarProdutoProps } from "./produto.types";
 import { 
     
@@ -14,7 +14,7 @@ import {
     ProdutoCategoriaTamanhoMinimoInvalido
 
 } from "./produto.exception";
-import { ProdutoMap } from "../mappers/produto.map";
+import { ProdutoMap } from "../../mappers/produto.map";
 
 class Produto extends Entity<IProduto> implements IProduto{
     

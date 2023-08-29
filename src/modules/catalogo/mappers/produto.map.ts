@@ -1,4 +1,4 @@
-import { Produto } from "../domain/produto.entity";
+import { Produto } from "../domain/produto/produto.entity";
 import { IProduto } from "../domain/produto.types";
 
 class ProdutoMap {
