@@ -1,92 +1,63 @@
 import { Categoria } from "@modules/catalogo/domain/categoria/categoria.entity";
-import { RecuperarCategoriaProps } from "@modules/catalogo/domain/categoria/categoria.types";
-import { Produto } from "@modules/catalogo/domain/produto/produto.entity";
-import { CategoriaMap } from "@modules/catalogo/mappers/categoria.map";
-import { ProdutoMap } from "@modules/catalogo/mappers/produto.map";
+import { PrismaClient } from "@prisma/client";
 import { DomainException } from "@shared/domain/domain.exception";
-import { readFile, writeFile } from "fs";
 
-try {
+const prisma = new PrismaClient();
 
-    ///////////////////
-    //Criar Categoria//
-    ///////////////////
-
-    let categoria: Categoria;
-    categoria = Categoria.criar({nome:'mesa'});
-    console.log(categoria);
+async function main() {
 
     ///////////////////////
-    //Recuperar Categoria//
+    ////criar categoria////
     ///////////////////////
 
-    let propsCategoria: RecuperarCategoriaProps = {
-        id:'6ad12850-abe4-49fe-967e-ab915cce9b3a',
-        nome: 'cama'
-    };
-    let categoria2: Categoria = Categoria.recuperar(propsCategoria);
-    console.log(categoria2);
+   /* let categoria: Categoria;
+    categoria = Categoria.criar({nome:'mesa'})
 
-    //////////////////////////////////////////////////////
-    //Persistinto e Recuperando em Arquivo - File System//
-    //////////////////////////////////////////////////////
+    /////////////////////////////////
+    ///persistir Categoria no Banco//
+    /////////////////////////////////
 
-    let arrayCategorias = [];
-    arrayCategorias.push(categoria.toDTO());
-	arrayCategorias.push(categoria2.toDTO());
-    
-    writeFile('categorias.json', JSON.stringify(arrayCategorias), function (error:any) {
-        if (error) throw error;
-        console.log('Arquivo Salvo com Sucesso!');
-        readFile('categorias.json', (error, dadoGravadoArquivo) => {
-            if (error) throw error;
-            console.log('Leitura de Arquivo!');
-            let categoriasSalvas: [] = JSON.parse(dadoGravadoArquivo.toString());
-            categoriasSalvas.forEach(categoriaJSON => {
-                console.log(categoriaJSON);
-                console.log(CategoriaMap.toDomain(categoriaJSON));
-            })
-        });
-    });
-} 
-catch (error:any) {
-    if (error instanceof DomainException) {
-        console.log('Execeção de Dóminio');
-        console.log(error.message);
-    }
-    else {
-        console.log('Outras Exceções');
-        console.log(error.message);
-    }
-}
-finally {
-    console.log('Ação que deve ser executada em caso de sucesso e em caso de exceção');
-}
+    await prisma.categoria.create({
+        data: {
+            id: categoria.id,
+            nome: categoria.nome
+        }
+    }); */
 
-try {
-    
-    let produto: Produto;
-    let categoria = Categoria.criar({ nome: 'costura'});
- 
-    
-    produto = Produto.criar( {nome: 'agulha', descricao: 'Produto para costura', valor: 100, categoria:[ categoria ]})
-    
-    console.log(produto);
 
-    let arrayProdutos = [];
-    arrayProdutos.push(produto.toDTO());
-   // arrayProdutos.push(produto2.toDTO());
-    writeFile('Produto.json', JSON.stringify(arrayProdutos), function(error:any){
-        if(error) throw error;
-        console.log('Arquivo Salvo com Sucesso!');
+    /////////////////////////////////
+    // atualizar categoria no Banco//
+    /////////////////////////////////
+
+    const categoriaAtualizada = await prisma.categoria.update({
+        where: {id:"1697d7a9-54c8-475a-81c2-d98733d733b7"},
+        data: {nome: 'Banho'},
     })
 
-} catch (error:any) {
-    if (error instanceof DomainException) {
-        console.log('Execeção de Dóminio');
-        console.log(error.message);
-    }else {
-        console.log('Outras Exceções');
-        console.log(error.message);
-    }
+
+
+
+    //////////////////////
+    //listar categoria////
+    /////////////////////
+    const listarCategoria = await prisma.categoria.findMany();
+    console.log(listarCategoria);
 }
+
+main()
+    .then(async () => {
+        await prisma.$disconnect()
+    })
+    .catch(async (error) => {
+        if (error instanceof DomainException){
+            console.log("exceção de Dominio");
+            console.log(error.message);
+        }
+        else{
+            console.log("Outras Exceções");
+            console.log(error.message);
+        }
+        await prisma.$disconnect()
+        process.exit(1)
+    })
+
